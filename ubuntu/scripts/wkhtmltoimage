@@ -1,2 +1,2 @@
 #!/bin/bash
-xvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltoimage-origin $*
+xvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/local/bin/wkhtmltox/bin/wkhtmltoimage $*
