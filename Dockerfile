@@ -1,13 +1,6 @@
 # Image
 FROM alpine:3.6
 
-# Environment variables
-ENV WKHTMLTOX_VERSION=0.12.4
-
-# Copy patches
-RUN mkdir -p /tmp/patches
-COPY conf/* /tmp/patches/
-
 # Install needed packages
 RUN apk add --update --no-cache \
         xvfb \
