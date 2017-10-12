@@ -20,11 +20,11 @@ RUN cd /tmp/fonts && \
 RUN mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf-origin && \
     mv /usr/bin/wkhtmltoimage /usr/bin/wkhtmltoimage-origin
 
-COPY scripts/* /usr/local/bin/
+COPY scripts/* /usr/bin/
 
 RUN  chmod +x /usr/bin/xvfb-run && \
      chmod +x /usr/bin/wkhtmltopdf && \
-     chmod +x /usr/bin/wkhtmltoimage && \
+     chmod +x /usr/bin/wkhtmltoimage
 
 # Clean up when done
 RUN rm -rf /tmp/* && \
