@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install needed packages
 RUN apt-get update && \
-    apt-get install -y wkhtmltopdf xvfb wget
+    apt-get install -y wkhtmltopdf xvfb wget unzip
 
 # Install SourceHanSans fonts
 RUN mkdir /tmp/fonts && \
@@ -27,4 +27,5 @@ RUN  chmod +x /usr/bin/xvfb-run && \
      chmod +x /usr/bin/wkhtmltoimage && \
 
 # Clean up when done
-RUN rm -rf /tmp/*
+RUN rm -rf /tmp/* && \
+    rm -rf /var/lib/apt/lists/*
