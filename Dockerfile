@@ -42,5 +42,5 @@ RUN cd /tmp/fonts && \
     fc-cache
 
 # Clean up when done
-RUN rm -rf /tmp/* \
-&& apk del .build-deps
+RUN rm -rf /tmp/* && \
+    rm -rf /var/cache/apk/*
