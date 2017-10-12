@@ -1,5 +1,5 @@
 # Image
-FROM alpine:3.4
+FROM alpine:3.6
 
 # Environment variables
 ENV WKHTMLTOX_VERSION=0.12.4
@@ -19,28 +19,24 @@ RUN apk add --no-cache \
   wget \
   tzdata \
   ca-certificates \
-  icu-dev \
-&& apk add --no-cache --virtual .build-deps \
+  icu-dev
+
+RUN apk add --no-cache --virtual .build-deps \
   g++ \
   git \
   gtk+-dev \
   make \
   mesa-dev \
   openssl-dev \
-  patch \
-&& apk add --update \
-            wqy-zenhei \
-            --no-cache \
-            --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
-            --allow-untrusted \
+  patch
 
 # Download source files
-&& git clone --recursive https://github.com/wkhtmltopdf/wkhtmltopdf.git /tmp/wkhtmltopdf \
+RUN git clone --recursive https://github.com/wkhtmltopdf/wkhtmltopdf.git /tmp/wkhtmltopdf \
 && cd /tmp/wkhtmltopdf \
-&& git checkout tags/$WKHTMLTOX_VERSION \
+&& git checkout tags/$WKHTMLTOX_VERSION
 
 # Apply patches
-&& patch -i /tmp/patches/wkhtmltopdf-buildconfig.patch \
+RUN patch -i /tmp/patches/wkhtmltopdf-buildconfig.patch \
 && cd /tmp/wkhtmltopdf/qt \
 && patch -p1 -i /tmp/patches/qt-musl.patch \
 && patch -p1 -i /tmp/patches/qt-musl-iconv-no-bom.patch \
@@ -157,8 +153,18 @@ RUN apk add --no-cache \
 && cd /tmp/wkhtmltopdf/qt \
 && make uninstall \
 && make clean \
-&& make distclean \
+&& make distclean
+
+# Install SourceHanSans fonts
+RUN mkdir /tmp/fonts && \
+    mkdir -p /usr/share/fonts/SourceHanSans
+
+RUN cd /tmp/fonts && \
+    wget -q https://github.com/adobe-fonts/source-han-sans/raw/release/SuperOTC/SourceHanSans.ttc.zip && \
+    unzip SourceHanSans.ttc.zip && \
+    mv SourceHanSans.ttc /usr/share/fonts/SourceHanSans/ && \
+    fc-cache
 
 # Clean up when done
-&& rm -rf /tmp/* \
+RUN rm -rf /tmp/* \
 && apk del .build-deps
