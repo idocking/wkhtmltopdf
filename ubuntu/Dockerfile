@@ -13,7 +13,7 @@ RUN mkdir /tmp/fonts && \
 
 RUN cd /tmp/ && \
     wget -q https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
-	tar xf -C /usr/local/bin/ && \
+	tar xf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz -C /usr/local/bin/ && \
 	rm /usr/bin/wkhtmltopdf && \
 	rm /usr/bin/wkhtmltoimage
 
