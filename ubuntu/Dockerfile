@@ -3,9 +3,6 @@ FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN sed -i "s/http:\/\/archive\.ubuntu\.com/http:\/\/mirrors\.aliyun\.com/g" /etc/apt/sources.list
-
-
 # Install needed packages
 RUN apt-get update && \
     apt-get install -y wkhtmltopdf xvfb wget
