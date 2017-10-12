@@ -1,2 +1,2 @@
 #!/bin/bash
-xvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/local/bin/wkhtmltox/bin/wkhtmltopdf $*
+xvfb-run -a --server-args="-screen 0 1024x768x24 -ac +extension GLX +render -noreset" /usr/local/bin/wkhtmltox/bin/wkhtmltopdf $*
