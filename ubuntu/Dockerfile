@@ -10,7 +10,7 @@ COPY scripts/* /usr/bin/
 
 RUN apt-get update \
     # Install needed packages
-    && apt-get install -y --no-install-recommends wkhtmltopdf xvfb wget unzip xz-utils dialog apt-utils \
+    && apt-get install -y wkhtmltopdf xvfb wget unzip xz-utils \
     && cd /tmp/ \
     # Install latest wkhtmltox
     && wget -q https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
