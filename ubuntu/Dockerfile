@@ -3,11 +3,14 @@ FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
+## For chinese user
+## RUN sed -i "s/http:\/\/archive\.ubuntu\.com/http:\/\/mirrors\.aliyun\.com/g" /etc/apt/sources.list
+
 COPY scripts/* /usr/bin/
 
 RUN apt-get update \
     # Install needed packages
-    && apt-get install -y --no-install-recommends wkhtmltopdf xvfb wget unzip xz-utils \
+    && apt-get install -y --no-install-recommends wkhtmltopdf xvfb wget unzip xz-utils dialog apt-utils \
     && cd /tmp/ \
     # Install latest wkhtmltox
     && wget -q https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
