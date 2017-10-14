@@ -5,10 +5,11 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY scripts/* /usr/bin/
 
-# Install needed packages
 RUN apt-get update \
+    # Install needed packages
     && apt-get install -y --no-install-recommends wkhtmltopdf xvfb wget unzip xz-utils \
     && cd /tmp/ \
+    # Install latest wkhtmltox
     && wget -q https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
     && tar xf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz -C /usr/local/bin/ \
     && rm wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
@@ -25,6 +26,7 @@ RUN apt-get update \
     && unzip SourceHanSans.ttc.zip \
     && mv SourceHanSans.ttc /usr/share/fonts/SourceHanSans/ \
     && fc-cache \
+    # Clearn
     && rm -rf /tmp/* \
-    && apt-get purge -y --auto-remove unzip xz-utils wget\
+    && apt-get purge -y --auto-remove unzip xz-utils wget \
     && rm -rf /var/lib/apt/lists/*
