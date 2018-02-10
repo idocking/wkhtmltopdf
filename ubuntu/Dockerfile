@@ -31,6 +31,5 @@ RUN apt-get update \
 
 COPY scripts/* /usr/bin/
 
-RUN chmod +x /usr/bin/xvfb-run \
-    && chmod +x /usr/bin/wkhtmltopdf \
+RUN chmod +x /usr/bin/wkhtmltopdf \
     && chmod +x /usr/bin/wkhtmltoimage
